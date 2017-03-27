@@ -1,0 +1,13 @@
+[
+  {
+      "id": "selection",
+      "children":
+      [
+          {
+            "id": "go_to_partial",
+            "caption": "Go To Partial",
+            "command": "go_to_partial"
+        }
+      ]
+  }
+]
