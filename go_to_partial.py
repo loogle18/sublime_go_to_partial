@@ -9,9 +9,8 @@ class GoToPartialCommand(TextCommand):
         view = self.view
         window = view.window()
         region = view.sel()[0]
-        # Only for cases when we have single project
-        project_folder_path = window.folders()[0]
-        target_partial_path = self.partial_name(region)
+        project_folder_path = self.get_project_path(view, window)
+        target_partial_path = self.partial_name(view, region)
 
         if target_partial_path:
             file = self.partial_path(project_folder_path, target_partial_path)
@@ -19,8 +18,19 @@ class GoToPartialCommand(TextCommand):
             if file:
                 window.open_file(file)
 
-    def partial_name(self, region):
-        view = self.view
+    def get_project_path(self, view, window):
+        current_view_path = view.file_name()
+        all_projects = window.folders()
+
+        if '/app' in current_view_path:
+            current_view_path = current_view_path.split('/app')[0]
+
+        for project in all_projects:
+            if current_view_path == project:
+                return project
+        return all_projects[0]
+
+    def partial_name(self, view, region):
         line_region = view.line(region)
         content = view.substr(line_region)
 
