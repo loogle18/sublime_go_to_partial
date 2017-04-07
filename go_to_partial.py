@@ -18,7 +18,8 @@ class GoToPartialCommand(TextCommand):
             if file:
                 window.open_file(file)
 
-    def get_project_path(self, view, window):
+    @staticmethod
+    def get_project_path(view, window):
         current_view_path = view.file_name()
         all_projects = window.folders()
 
@@ -30,7 +31,8 @@ class GoToPartialCommand(TextCommand):
                 return project
         return all_projects[0]
 
-    def partial_name(self, view, region):
+    @staticmethod
+    def partial_name(view, region):
         line_region = view.line(region)
         content = view.substr(line_region)
 
@@ -52,7 +54,8 @@ class GoToPartialCommand(TextCommand):
                 if cursor_at in partial_range:
                     return partial
 
-    def partial_path(self, project_dir, partial_name):
+    @staticmethod
+    def partial_path(project_dir, partial_name):
         project_dir += '/app/views'
 
         for root, _dirnames, filenames in os.walk(project_dir):
