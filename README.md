@@ -3,3 +3,5 @@ Supports multiple projects.
 Does not work with multi-lines!
 
 The default keybinding is Ctrl+m.
+
+![Example](example.gif)
